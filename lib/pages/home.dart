@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
       var listPosts = getPostsData.map((i) => Posts.fromJson(i)).toList();
       return listPosts;
     } else {
-      throw Exception('Failed to load Posts');
+      throw Exception('Gagal meload data');
     }
   }
 
