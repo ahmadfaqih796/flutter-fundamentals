@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
 
     print(response.statusCode);
-    print(response.body);
+    // print(response.body);
 
     if (response.statusCode == 200) {
       var getPostsData = json.decode(response.body) as List;

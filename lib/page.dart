@@ -19,7 +19,7 @@ class PageNext extends StatelessWidget {
             child: const Text("Click"),
             onPressed: () {},
           ),
-          Container(height: 20.0), //SizedBox(height: 20.0),
+          Container(height: 20.0),
           const Text(
             'Hello',
             style: TextStyle(
