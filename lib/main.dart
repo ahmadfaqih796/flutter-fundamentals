@@ -16,21 +16,26 @@
 //     );
 //   }
 // }
-
 import 'package:flutter/material.dart';
-import 'src/screens/home_screen.dart';
+import 'package:project_1/src/screens/home_screen.dart';
+import 'theme.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'My Flutter App',
-      home: HomeScreen(),
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode
+          .system, // Pilih ThemeMode.light atau ThemeMode.dark jika ingin mengatur mode secara manual
+      home: const HomeScreen(),
     );
   }
 }
