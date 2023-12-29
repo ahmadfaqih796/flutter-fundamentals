@@ -1,16 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:project_1/src/screens/about_screen.dart';
 
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({Key? key}) : super(key: key);
+class MyDrawer extends StatelessWidget {
+  final Function onTapHome;
 
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  const MyDrawer({Key? key, required this.onTapHome}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: const Text('My App'),
-      // Add additional app bar customization here
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text('Drawer Header'),
+          ),
+          ListTile(
+            title: const Text('Home'),
+            onTap: () {
+              // Tutup drawer
+              Navigator.pop(context);
+              // Panggil fungsi onTapHome
+              onTapHome();
+            },
+          ),
+          ListTile(
+            title: const Text('New Screen'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutScreen()),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
