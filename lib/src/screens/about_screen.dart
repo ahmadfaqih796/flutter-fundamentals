@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_1/src/widgets/appbar_widget.dart';
 import 'package:project_1/theme.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -24,9 +23,6 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('New Screen'),
-      ),
-      drawer: MyDrawer(
-        onTapHome: onTapHome,
       ),
       body: const Center(
         child: Text('This is the new screen!'),
