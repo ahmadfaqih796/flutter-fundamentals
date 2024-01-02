@@ -1,13 +1,21 @@
+// ignore_for_file: library_private_types_in_public_api, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:project_1/src/screens/about_screen.dart';
 import 'package:project_1/src/widgets/navbar/appbar_widget.dart';
 import 'package:project_1/theme.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class StatefulScreen extends StatefulWidget {
+  const StatefulScreen({Key? key}) : super(key: key);
+
+  @override
+  _StatefulScreenState createState() => _StatefulScreenState();
+}
+
+class _StatefulScreenState extends State<StatefulScreen> {
+  bool isDarkMode = false;
 
   void onTapHome(BuildContext context) {
-    // Logika untuk menavigasi ke halaman Home jika diperlukan
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -23,34 +31,54 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = false;
+    return HomeScreenContent(
+      isDarkMode: isDarkMode,
+      onTapHome: onTapHome,
+      toggleDarkMode: () {
+        setState(() {
+          isDarkMode = !isDarkMode;
+          ThemeMode newThemeMode =
+              Theme.of(context).brightness == Brightness.light
+                  ? ThemeMode.dark
+                  : ThemeMode.light;
 
+          MaterialApp app = MaterialApp(
+            themeMode: newThemeMode,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            home: const StatefulScreen(),
+          );
+
+          runApp(app);
+        });
+      },
+    );
+  }
+}
+
+class HomeScreenContent extends StatelessWidget {
+  const HomeScreenContent({
+    required this.isDarkMode,
+    required this.onTapHome,
+    required this.toggleDarkMode,
+  });
+
+  final bool isDarkMode;
+  final void Function(BuildContext) onTapHome;
+  final VoidCallback toggleDarkMode;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My App'),
         actions: [
           IconButton(
             icon: Icon(
-              // ignore: dead_code
               isDarkMode ? Icons.light_mode : Icons.dark_mode,
               color: Colors.white,
             ),
-            onPressed: () {
-              isDarkMode = !isDarkMode;
-              ThemeMode newThemeMode =
-                  Theme.of(context).brightness == Brightness.light
-                      ? ThemeMode.dark
-                      : ThemeMode.light;
-
-              MaterialApp app = MaterialApp(
-                themeMode: newThemeMode,
-                theme: lightTheme,
-                darkTheme: darkTheme,
-                home: const HomeScreen(),
-              );
-
-              runApp(app);
-            },
+            onPressed: toggleDarkMode,
           ),
         ],
       ),
@@ -66,15 +94,13 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 ThemeMode newThemeMode =
-                    Theme.of(context).brightness == Brightness.light
-                        ? ThemeMode.dark
-                        : ThemeMode.light;
+                    isDarkMode ? ThemeMode.light : ThemeMode.dark;
 
                 MaterialApp app = MaterialApp(
                   themeMode: newThemeMode,
                   theme: lightTheme,
                   darkTheme: darkTheme,
-                  home: const HomeScreen(),
+                  home: const StatefulScreen(),
                 );
 
                 runApp(app);
