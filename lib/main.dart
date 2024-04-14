@@ -18,6 +18,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:project_1/src/screens/auth/register.dart';
+import 'package:project_1/src/screens/auth/signup.dart';
 import 'package:project_1/src/screens/home_screen.dart';
 import 'package:project_1/src/screens/auth/login.dart';
 import 'package:project_1/src/screens/stateful_screen.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       darkTheme: darkTheme,
       themeMode: ThemeMode
           .system, // Pilih ThemeMode.light atau ThemeMode.dark jika ingin mengatur mode secara manual
-      home: const RegisterScreen(),
+      home: const SignupForm(),
     );
   }
 }
