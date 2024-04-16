@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:project_1/controllers/auth_controller.dart';
 import 'package:project_1/services/api_service.dart';
+import 'package:project_1/services/auth_service.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({Key? key}) : super(key: key);
@@ -26,7 +29,17 @@ class _SignupFormState extends State<SignupForm> {
 
     try {
       // Panggil fungsi register dari AuthController
-      await _authController.register(name, email, password);
+
+      Map<String, dynamic> datas = {
+        "email": email,
+        "password": password,
+        "fullname": password,
+      };
+
+      var res = await ActivityService().leave(datas);
+
+      print(jsonEncode(res));
+      // await _authController.register(name, email, password);
       // Navigasi ke layar sukses setelah berhasil mendaftar
       // Navigator.push(context, MaterialPageRoute(builder: (context) => SuccessScreen()));
     } catch (e) {

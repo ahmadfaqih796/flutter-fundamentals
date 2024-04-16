@@ -6,38 +6,34 @@ class AuthController extends GetxController {
 
   Future<void> register(String name, String email, String password) async {
     try {
-      // const String url = 'http://127.0.0.1/auth/register';
-      // const String url = 'https://dummyjson.com/users/add';
-
-      const String url = 'http://localhost:9090/auth/register';
-
       BaseOptions options = BaseOptions(
-        // baseUrl: 'http://localhost:9090',
-        baseUrl: 'https://dummyjson.com',
+        baseUrl: 'http://192.168.113.151:3030',
+        // baseUrl: 'https://0b9e-2a09-bac1-34e0-30-00-279-20.ngrok-free.app',
+        // baseUrl: 'https://dummyjson.com',
         connectTimeout: 5000,
         receiveTimeout: 3000,
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': 'Bearer <token>'
+          // 'Authorization': 'Bearer <token>',
         },
       );
 
-      // Set opsi ke Dio
       _dio.options = options;
       final response = await _dio.post(
-        // '/auth/register',
-        '/users/add',
+        '/users',
+        // '/users/add',
         data: {
-          // 'full_name': name,
-          // 'email': email,
-          // 'password': password,
+          'full_name': name,
+          'email': email,
+          'password': password,
           // 'position': 'ADMIN',
           // 'telephone': '999090',
-          "firstName": 'Muhammad',
-          "lastName": 'Ovi',
-          "age": 250,
+          // "firstName": name,
+          // "lastName": email,
+          // "age": 250,
         },
       );
+      print(response);
       if (response.statusCode == 200) {
         print('User registered successfully with response: ${response.data}');
       } else {
